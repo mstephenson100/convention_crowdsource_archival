@@ -1,10 +1,13 @@
 # Steps to install Api
+
 Follow these steps to install the API server
 
 # Install pyenv
+
 Pyenv is required for this to work.
 
 ## Prerequisites
+
 This documentation assumes you already have a pre-loaded MySQL Database with user privileges configured. You can find the bare schema in schema.sql
 
 Configure config.py:
@@ -26,39 +29,42 @@ $ python -m venv venv
 $ source venv/bin/activate
 (venv) $
 ~~~
-Install packages 
+Install packages
 ~~~
 (venv) $ pip install -r requirements.txt
 ~~~
 The remaining configs should already be good enough to make this run.
 
 ## Test some stuff
- You should probably test to make sure your environment is working. Verify that app.py runs without error. The following command should not return an error:
- ~~~~
- (venv) $ python app.py
- * Serving Flask app 'server'
+
+You should probably test to make sure your environment is working. Verify that app.py runs without error. The following command should not return an error:
+~~~
+(venv) $ python app.py
+* Serving Flask app 'server'
 * Debug mode: off
 **WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.**
 * Running on http://127.0.0.1:5000
 Press CTRL+C to quit
 ~~~
-  
- ### Try making an API call
- This will only work if you have a copy of the fully indexed MySQL data loaded on a locally hosted node with credentials correctly configured in config.py. Run the following curl command from another shell instance on the node where app.py is currently running:
- ~~~~
- $ curl http://localhost:5000/api/years
+
+### Try making an API call
+
+This will only work if you have a copy of the fully indexed MySQL data loaded on a locally hosted node with credentials correctly configured in config.py. Run the following curl command from another shell instance on the node where app.py is currently running:
+
+~~~
+$ curl http://localhost:5000/api/years
 [
-  1987,
-  1988,
-  1989,
-  ....
+1987,
+1988,
+1989
 ]
 ~~~
 
 ## Continue configuring uwsgi
+
 CTL-C out of app.py and try running with uwsgi
-~~~
-(env) $ uwsgi --socket 0.0.0.0:5000 --protocol=http -w wsgi:app
+
+> (env) $ uwsgi --socket 0.0.0.0:5000 --protocol=http -w wsgi:app
 *** Starting uWSGI 2.0.30 (64bit) on [Tue Jul  8 12:15:01 2025] ***
 compiled with version: Apple LLVM 15.0.0 (clang-1500.3.9.4) on 08 July 2025 17:57:55
 os: Darwin-23.6.0 Darwin Kernel Version 23.6.0: Fri Jul  5 18:01:46 PDT 2024; root:xnu-10063.141.1~2/RELEASE_ARM64_T8112
@@ -88,11 +94,12 @@ unable to load app 0 (mountpoint='') (callable not found or import error)
 *** no app loaded. going in full dynamic mode ***
 *** uWSGI is running in multiple interpreter mode ***
 spawned uWSGI worker 1 (and the only) (pid: 63038, cores: 1)
-~~~
+
 
 If uwsgi runs without an error then try running the previous curl command and verify that data returns. If so then you are ready to move to the next steps of enabling the API as a service.
 
 ## Enable uWSGI as a service
+
 You can now stop both app.py and uWSGI and deactivate the pyenv environment:
 ~~~
 (venv) $ deactivate
@@ -109,18 +116,22 @@ User=api
 Group=www-data
 WorkingDirectory=/app/convention_crowdsource_archival/api
 Environment="PATH=/app/convention_crowdsource_archival/api/venv/bin"
-ExecStart=/app/convention_crowdsource_archival/api/venv/bin/uwsgi --ini api.ini
+ExecStart=/app/convention_crowdsource_archival/api/venv/bin/uwsgi --ini api.ini  
 
 [Install]
 WantedBy=multi-user.target
 ~~~
 This should point at the correct path for wherever you have the apiserver code installed.
+
 ### Set some permissions
+
 Go back to wherever you have the api code installed and fix it's permissions to be accessible by the www-data group. This will make it accessible to nginx:
 ~~~
 $ sudo chgrp www-data /app/convention_crowdsource_archival/api
 ~~~
+
 ### Enable uWSGI to run as a service
+
 Start the api service which you configured two steps earlier:
 ~~~
 $ sudo systemctl start myapi
