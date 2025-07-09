@@ -1,0 +1,117 @@
+/* === Base Theme === */
+body {
+  font-family: proxima-nova, sans-serif;
+  font-weight: 400;
+  background-color: #1c1234; /* deep purple */
+  color: #f7f1df; /* pale gold text */
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #ffcc00;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* === Headers === */
+h1 {
+  font-family: hwt-artz, sans-serif;
+  font-weight: 700;
+  font-size: 2.2rem;
+  color: #ffcc00;
+  border-bottom: 2px solid #ffcc00;
+  padding-bottom: 0.5rem;
+  margin-top: 2rem;
+}
+
+h2 {
+  font-family: domyouji, sans-serif;
+  font-weight: 400;
+  color: #f7f1df;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+h2, h3, h4, h5, h6 {
+  margin-bottom: 16px;
+}
+
+p, ul, ol {
+  margin-bottom: 21px;
+}
+
+/* === Container === */
+body > div {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #2b1b47; /* slightly lighter than background */
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+/* === Tables === */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+  background-color: #3a2560;
+  color: #f7f1df;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #fff;
+}
+
+th {
+  background-color: #452c73;
+  color: #ffcc00;
+  font-weight: bold;
+}
+
+/* === Buttons === */
+button {
+  background-color: #ffcc00;
+  color: #1c1234;
+  border: none;
+  padding: 8px 16px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #f7b600;
+}
+
+/* === Images === */
+img {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid #ffcc00;
+  margin-top: 0.5rem;
+}
+
+/* === Utility === */
+hr {
+  border: 0;
+  border-top: 1px solid #888;
+  margin: 2rem 0;
+}
+
+/* === Emojis === */
+img.wp-smiley, img.emoji {
+  display: inline !important;
+  border: none !important;
+  box-shadow: none !important;
+  height: 1em !important;
+  width: 1em !important;
+  margin: 0 0.07em !important;
+  vertical-align: -0.1em !important;
+  background: none !important;
+  padding: 0 !important;
+}
+

@@ -1,0 +1,7 @@
+wheel
+uwsgi
+Flask
+Flask-Cors
+PyMySQL
+werkzeug
+jwt
