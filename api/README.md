@@ -64,37 +64,12 @@ $ curl http://localhost:5000/api/years
 
 CTL-C out of app.py and try running with uwsgi
 
-> (env) $ uwsgi --socket 0.0.0.0:5000 --protocol=http -w wsgi:app
-*** Starting uWSGI 2.0.30 (64bit) on [Tue Jul  8 12:15:01 2025] ***
-compiled with version: Apple LLVM 15.0.0 (clang-1500.3.9.4) on 08 July 2025 17:57:55
-os: Darwin-23.6.0 Darwin Kernel Version 23.6.0: Fri Jul  5 18:01:46 PDT 2024; root:xnu-10063.141.1~2/RELEASE_ARM64_T8112
-nodename: woo
-machine: arm64
-clock source: unix
-pcre jit disabled
-detected number of CPU cores: 8
-current working directory: /app/convention_crowdsource_archival/api
-detected binary path: /app/convention_crowdsource_archival/api/venv/bin/uwsgi
-*** WARNING: you are running uWSGI without its master process manager ***
-your processes number limit is 4000
-your memory page size is 16384 bytes
-detected max file descriptor number: 2560
-lock engine: OSX spinlocks
-thunder lock: disabled (you can enable it with --thunder-lock)
-uwsgi socket 0 bound to TCP address 0.0.0.0:5000 fd 3
-Python version: 3.9.6 (default, Jul  8 2025, 11:53:22)  [Clang 15.0.0 (clang-1500.3.9.4)]
-Python main interpreter initialized at 0x13b804990
-python threads support enabled
-your server socket listen backlog is limited to 100 connections
-your mercy for graceful operations on workers is 60 seconds
-mapped 72896 bytes (71 KB) for 1 cores
-*** Operational MODE: single process ***
-ModuleNotFoundError: No module named 'wsgi'
-unable to load app 0 (mountpoint='') (callable not found or import error)
-*** no app loaded. going in full dynamic mode ***
-*** uWSGI is running in multiple interpreter mode ***
+~~~
+(env) $ uwsgi --socket 0.0.0.0:5000 --protocol=http -w wsgi:app
+Starting uWSGI 2.0.30 (64bit) on [Tue Jul  8 12:15:01 2025]
+....
 spawned uWSGI worker 1 (and the only) (pid: 63038, cores: 1)
-
+~~~
 
 If uwsgi runs without an error then try running the previous curl command and verify that data returns. If so then you are ready to move to the next steps of enabling the API as a service.
 
